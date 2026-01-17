@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+
+:root {
+    --background-color: #010101;
+    --primary-color: #FF6F00;
+    --secondary-color: #111111;
+    --third-color: rgb(169, 94, 14);
+    --text-color1: #FFFFFF;
+    --text-color2: #000000;
+    --error-color: #FF4C4C;
+    --success-color: #00E800;
+
+    --font1: 'Raleway', sans-serif;
+    --logo-font: 'Black Ops One', cursive;
+}
+
+.btn {
+    cursor: pointer;
+    font-weight: bold;
+    width: fit-content;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    background-color: var(--primary-color);
+    color: var(--text-color1);
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    &:hover {
+        background-color: var(--background-color);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    &:focus,
+    &:active {
+        outline: none;
+        border: 1px solid var(--primary-color);
+    }
+}
+
+.page {
+    display: flex; // Sidebar + main content
+    flex-direction: row;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.main {
+    flex: 5.5;
+    height: 100vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--secondary-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--third-color);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+    }
+}

@@ -1,0 +1,49 @@
+@use './Var.scss' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font1);
+
+  // .main {
+  //   flex: 5.5;
+  //   height: 100vh;
+  //   overflow-y: auto;
+
+  //   &::-webkit-scrollbar {
+  //     width: 8px;
+  //   }
+
+  //   &::-webkit-scrollbar-track {
+  //     background: var(--secondary-color);
+  //   }
+
+  //   &::-webkit-scrollbar-thumb {
+  //     background: var(--third-color);
+  //     border-radius: 4px;
+  //   }
+
+  //   &::-webkit-scrollbar-thumb:hover {
+  //     background: var(--primary-color);
+  //   }
+  // }
+}
+
+//  #root {
+//   max-width: 1280px;
+//   margin: 0 auto;
+//   padding: 2rem;
+//   text-align: center;
+// } 
+

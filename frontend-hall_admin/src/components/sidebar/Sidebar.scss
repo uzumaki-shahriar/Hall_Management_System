@@ -1,0 +1,87 @@
+@use '../../Var.scss' as *;
+
+.sidebar {
+    width: 300px;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-right: 1px solid var(--third-color);
+
+    .top {
+        border-bottom: 1px solid var(--third-color);
+        // padding-left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .sidebar-title {
+            font-family: var(--logo-font);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: start;
+        }
+    }
+
+
+    .bottom {
+        padding: 10px 25px;
+        width: 100%;
+        height: max-content;
+        // margin-left: 10px;
+        margin-top: 0px;
+        // background-color: red;
+        box-shadow: none;
+        border: none;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            .title {
+                font-size: 22px;
+                font-weight: bold;
+                color: var(--text-color1);
+                margin-top: 15px;
+                margin-bottom: 5px;
+            }
+
+            li {
+                display: flex;
+                align-items: center;
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: color-mix(in srgb, var(--secondary-color), white 5%);
+                }
+
+                .icon {
+                    font-size: 20px;
+                    color: var(--primary-color);
+                }
+
+                span {
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: var(--third-color);
+                    margin-left: 10px;
+                }
+            }
+
+            a.active li {
+                background-color: var(--primary-color);
+
+                .icon,
+                span {
+                    color: var(--text-color1);
+                }
+            }
+        }
+    }
+}
