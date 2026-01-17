@@ -1,0 +1,71 @@
+@use '../../Var.scss' as *;
+
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url('../../assets/landing.webp') no-repeat center center;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .login-form {
+        width: 420px;
+        padding: 2.5rem;
+        border-radius: 16px;
+
+        background: rgba(255, 255, 255, 0.01); // glass background
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border: 0.1px solid var(--third-color);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+
+        .login-title {
+            // font-family: var(--heading-font);
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            width: 100%;
+
+            label {
+                color: var(--text-color1);
+                font-size: 1rem;
+                font-weight: bold;
+            }
+
+            input{
+                padding: 0.75rem 2.5rem 0.75rem 0.9rem;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                background: rgba(0, 0, 0, 0.45);
+                color: var(--text-color1);
+                outline: none;
+                font-size: 1rem;
+
+                &:focus {
+                    border-color: var(--primary-color);
+                }
+            }
+        }
+
+        .login-btn {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+    }
+}
