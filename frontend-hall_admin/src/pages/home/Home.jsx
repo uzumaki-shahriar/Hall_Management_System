@@ -16,7 +16,7 @@ export default function Home() {
     <div className='home-container'>
       <div className="logo">HallMate</div>
       <TypingEffect
-        text="Every Student's Companion."
+        text="  Every Student's Companion."
         speed={100}
         cls="slogan"
       />

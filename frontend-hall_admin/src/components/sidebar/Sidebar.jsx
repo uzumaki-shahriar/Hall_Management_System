@@ -8,6 +8,8 @@ import { VscAccount } from "react-icons/vsc";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { IoPersonAddOutline } from "react-icons/io5";
+import { BsPeople } from "react-icons/bs";
+import { MdOutlineMeetingRoom } from "react-icons/md";
 
 
 export default function Sidebar() {
@@ -25,21 +27,33 @@ export default function Sidebar() {
             </div>
             <div className="bottom">
                 <ul>
-                    <p className="title">Main</p>
+                    <p className="title">Overview</p>
                     <NavLink style={{ textDecoration: "none" }} to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>
                         <li>
                             <LuLayoutDashboard className="icon" />
                             <span>Dashboard</span>
                         </li>
                     </NavLink>
-                    <p className="title">My Work</p>
-                     <NavLink style={{ textDecoration: "none" }} to="/add_new_student" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink style={{ textDecoration: "none" }} to="/student-list" className={({ isActive }) => isActive ? 'active' : ''}>
+                        <li>
+                            <BsPeople className="icon" />
+                            <span>Student List</span>
+                        </li>
+                    </NavLink>
+                    {/* <NavLink style={{ textDecoration: "none" }} to="/room-list" className={({ isActive }) => isActive ? 'active' : ''}>
+                        <li>
+                            <MdOutlineMeetingRoom className="icon" />
+                            <span>Room List</span>
+                        </li>
+                    </NavLink> */}
+                    <p className="title">Management</p>
+                     <NavLink style={{ textDecoration: "none" }} to="/add-student" className={({ isActive }) => isActive ? 'active' : ''}>
                         <li>
                             <IoPersonAddOutline className='icon'/>
                             <span>Add New Student</span>
                         </li>
                     </NavLink>
-                    <NavLink style={{ textDecoration: "none" }} to="/appointments" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink style={{ textDecoration: "none" }} to="/dinning-applications" className={({ isActive }) => isActive ? 'active' : ''}>
                         <li>
                             <FaWpforms className='icon'/>
                             <span>Dinning Applications</span>
@@ -51,12 +65,12 @@ export default function Sidebar() {
                             <span>Feedbacks</span>
                         </li>
                     </NavLink>
-                    <NavLink style={{ textDecoration: "none" }} to="/edit_hall" className={({ isActive }) => isActive ? 'active' : ''}>
+                    {/* <NavLink style={{ textDecoration: "none" }} to="/edit-hall" className={({ isActive }) => isActive ? 'active' : ''}>
                         <li>
                             <FaRegEdit className='icon'/>
-                            <span>Edit Hall Info.</span>
+                            <span>Edit Hall Details</span>
                         </li>
-                    </NavLink>
+                    </NavLink> */}
                     <p className="title">Account</p>
                     <NavLink style={{ textDecoration: "none" }} to="/profile" className={({ isActive }) => isActive ? 'active' : ''}>
                         <li>

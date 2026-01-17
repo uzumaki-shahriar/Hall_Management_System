@@ -8,8 +8,8 @@
     --secondary-color: #111111;
     --third-color: rgb(169, 94, 14);
     --text-color1: #FFFFFF;
-    --text-color2: #000000;
-    --error-color: #FF4C4C;
+    --text-color2: #969595;
+    --error-color: #f80000;
     --success-color: #00E800;
 
     --font1: 'Raleway', sans-serif;
@@ -56,9 +56,28 @@
     background-color: var(--background-color);
 }
 
+.header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--third-color);
+    // background-color: yellow; 
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: var(--text-color2);
+    }
+}
+
 .main {
-    flex: 5.5;
-    height: 100vh;
+    flex: 1; // take remaining space next to sidebar
+    padding: 2rem;
+    background-color: var(--background-color);
+    color: var(--text-color1);
     overflow-y: auto;
 
     &::-webkit-scrollbar {

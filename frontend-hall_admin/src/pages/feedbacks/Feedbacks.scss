@@ -1,0 +1,51 @@
+@use '../../Var.scss' as *;
+
+.feedbacks-list {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 22px;
+
+    .feedback-card {
+        background: var(--secondary-color);
+        border-radius: 16px;
+        padding: 22px 24px;
+        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .std-info {
+            // background-color: red;
+            border-bottom: 1px solid var(--third-color);
+
+            h3 {
+                font-size: 24px;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+
+            p {
+                font-size: 20px;
+                color: var(--text-color2);
+                margin: 0;
+                margin-bottom: 1rem;
+
+                strong {
+                    color: var(--third-color);
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .feedback-text {
+            margin-top: 6px;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--text-color1);
+            //   background: var(--background-color);
+            padding: 14px 16px;
+            border-radius: 10px;
+        }
+    }
+}
