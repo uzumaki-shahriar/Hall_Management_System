@@ -70,7 +70,7 @@ class SuperAdminService:
         return TokenResponse(
             access_token=access_token,
             token_type="bearer",
-            expires_in=get_token_expiration_seconds()
+            expires_in=get_token_expiration_seconds(access_token)
         )
     
     @staticmethod
@@ -99,11 +99,12 @@ class SuperAdminService:
         hall_admin_data: HallAdminSignUpRequest,
         creator_super_admin_id: str
     ):
+        
         new_student_hall = sthall.create_student_hall(
             db,
             StudentHall(
                 hall_name=student_hall_data.hall_name,
-                asscociated_university_name=student_hall_data.associated_university_name,
+                associated_university_name=student_hall_data.associated_university_name,
                 hall_dinning_fee=student_hall_data.hall_dinning_fee,
                 total_rooms=student_hall_data.total_rooms,
                 created_by_super_admin_id=creator_super_admin_id
@@ -125,7 +126,8 @@ class SuperAdminService:
                 hall_admin_email=hall_admin_data.hall_admin_email,
                 hall_admin_contact_number=hall_admin_data.hall_admin_contact_number,
                 hall_admin_hashed_password=hashed_password,
-                asscociated_hall_id=new_student_hall.hall_id
+                asscociated_hall_id=new_student_hall.hall_id,
+                created_by_super_admin_id=creator_super_admin_id
             )
         )
         send_hall_admin_credentials(

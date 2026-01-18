@@ -23,11 +23,9 @@ async def get_current_super_admin(
     token = credentials.credentials
     try:
         payload = decode_access_token(
-            token,
-            settings.ACCESS_TOKEN_SECRET_KEY,
-            settings.ACCESS_TOKEN_ALGORITHM
+            token
         )
-        super_admin_id: int = payload.get("sub")
+        super_admin_id: str = payload.get("sub")
         if super_admin_id is None:
             raise credentials_exception
     except Exception:
@@ -49,11 +47,9 @@ async def get_current_hall_admin(
     token = credentials.credentials
     try:
         payload = decode_access_token(
-            token,
-            settings.ACCESS_TOKEN_SECRET_KEY,
-            settings.ACCESS_TOKEN_ALGORITHM
+            token
         )
-        hall_admin_id: int = payload.get("sub")
+        hall_admin_id: str = payload.get("sub")
         if hall_admin_id is None:
             raise credentials_exception
     except Exception:

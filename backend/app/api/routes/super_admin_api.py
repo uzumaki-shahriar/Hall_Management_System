@@ -80,7 +80,7 @@ async def create_student_hall_with_hall_admin(
     )
     return MessageResponse(
         response_code=status.HTTP_201_CREATED,
-        message=f"Student Hall {result.student_hall.hall_name} created successfully with Hall Admin {result.hall_admin.hall_admin_name}",
+        message="Student Hall created successfully with Hall Admin",
         success=True
     )
 

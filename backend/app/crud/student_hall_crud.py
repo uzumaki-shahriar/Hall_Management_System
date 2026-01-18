@@ -1,6 +1,7 @@
 from sqlmodel import Session, select
 from typing import Optional
 from ..models.student_hall_model import StudentHall
+from ..models.student_model import Student
 
 def get_all_student_halls(db: Session) -> list[StudentHall]:
     statement = select(StudentHall)
@@ -27,3 +28,9 @@ def get_student_hall_name_by_hall_id(db: Session, hall_id: int) -> Optional[str]
     statement = select(StudentHall.hall_name).where(StudentHall.hall_id == hall_id)
     result = db.exec(statement).first()
     return result
+
+def get_all_students_in_hall(db: Session, hall_id: str) -> list[Student]:
+    statement = select(Student).where(Student.student_hall_id == hall_id)
+    results = db.exec(statement).all()
+    return results
+   

@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr, Field
 class StudentSignUpRequest(BaseModel):
     
     student_id: str = Field(..., max_length=8)
+    student_email: EmailStr
     student_name: str = Field(..., max_length=100)
     student_room_number: int = Field(..., max_length=10)
     student_batch: str = Field(..., max_length=10)
@@ -13,7 +14,7 @@ class StudentLoginRequest(BaseModel):
     
     student_id: str = Field(..., max_length=8)
     student_email: EmailStr
-    student_password: str = Field(..., min_length=6, max_length=100)
+    student_password: str = Field(..., min_length=8, max_length=100)
 
 class StudentProfileResponse(BaseModel):
 
@@ -25,6 +26,7 @@ class StudentProfileResponse(BaseModel):
     student_room_number: int
     student_contact_number: str
     student_home_address: str
+    student_hall_name: str
 
     class Config:
         from_attributes = True

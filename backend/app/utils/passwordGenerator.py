@@ -14,3 +14,15 @@ def generate_hall_admin_password(
     
     return password
 
+def generate_student_password(
+        length: int = 8
+)-> str:
+    """Generate a random password for student."""
+    if length < 8:
+        raise ValueError("Password length should be at least 8 characters.")
+    
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(characters) for _ in range(length))
+    
+    return password
+

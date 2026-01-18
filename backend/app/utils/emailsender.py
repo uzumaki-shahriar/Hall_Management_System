@@ -36,3 +36,38 @@ def send_hall_admin_credentials(
         print(f"Credentials email sent to {hall_admin_email}")
     except Exception as e:
         print(f"Failed to send email to {hall_admin_email}: {e}")
+
+
+
+def send_student_credentials(
+        student_email: str,
+        student_name: str,
+        student_password: str
+    ):
+    sender_email = os.getenv("SYSTEM_EMAIL")
+    sender_password = os.getenv("SYSTEM_EMAIL_PASSWORD")
+    receiver_email = student_email
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+    msg['Subject'] = "Your Student Hallmate Account Credentials"
+    body = f"""
+    Dear {student_name},
+    You have been registered in the Hallmate system.
+    Here are your login credentials:
+    Email: {student_email}
+    Password: {student_password}
+    Please change your password upon first login.
+    Best regards,
+    Hallmate Team
+    """
+
+    msg.attach(MIMEText(body, 'plain'))
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.send_message(msg)
+        print(f"Credentials email sent to {student_email}")
+    except Exception as e:
+        print(f"Failed to send email to {student_email}: {e}")

@@ -3,6 +3,10 @@ from sqlmodel import Field, SQLModel, Relationship
 from decimal import Decimal
 
 
+if TYPE_CHECKING:
+    from ..models.hall_admin_model import HallAdmin
+    from ..models.student_hall_model import StudentHall
+
 
 class Student(SQLModel, table=True):
 
@@ -19,5 +23,9 @@ class Student(SQLModel, table=True):
     student_hall_fee: Optional[Decimal] = Field(default=None, nullable=True)
     student_room_number: Optional[int] = Field(default=None, max_length=10, nullable=True)
     student_hashed_password: str = Field(max_length=255)
-
+    created_by_hall_admin_id: Optional[str] = Field(default=None, foreign_key="hall_admins.hall_admin_id", index=True, max_length=36)
+    student_hall_id: Optional[str] = Field(default=None, foreign_key="student_halls.hall_id", index=True, max_length=36)
+    
     # Relationships
+    created_by_hall_admin: Optional["HallAdmin"] = Relationship(back_populates="student_accounts_created")
+    student_hall: Optional["StudentHall"] = Relationship(back_populates="hall_resident_students")

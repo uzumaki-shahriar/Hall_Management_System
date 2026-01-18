@@ -1,7 +1,10 @@
 from sqlmodel import Field, SQLModel, Relationship
-from typing import Optional, List
+from typing import Optional, List, TYPE_CHECKING
 from ..models.student_hall_model import StudentHall
 import uuid
+
+if TYPE_CHECKING:
+    from ..models.hall_admin_model import HallAdmin
 
 class SuperAdmin(SQLModel, table=True):
 
@@ -13,3 +16,4 @@ class SuperAdmin(SQLModel, table=True):
 
     # Relationships
     created_halls: List["StudentHall"] = Relationship(back_populates="creator_super_admin")
+    hall_admins_created: List["HallAdmin"] = Relationship(back_populates="created_by_super_admin")

@@ -3,6 +3,8 @@ from sqlmodel import Session
 from ...db.session import get_session
 from ...schemas.hall_admin_schema import HallAdminLoginRequest, HallAdminProfileResponse, HallAdminChangePasswordRequest
 from ...schemas.helper_schema import TokenResponse, MessageResponse
+from ...schemas.student_hall_schema import StudentHallProfileResponse
+from ...schemas.student_schema import StudentSignUpRequest, StudentProfileResponse
 from ...services.hall_admin_service import HallAdminService
 from ...utils.dependencies import get_current_hall_admin
 from ...models.hall_admin_model import HallAdmin
@@ -69,3 +71,65 @@ async def change_hall_admin_password(
         change_password_data
     )
     return message_response
+
+@router.get("/profile/student_hall",
+            response_model=StudentHallProfileResponse,
+            status_code=status.HTTP_200_OK,
+            summary="Get Associated Student Hall Profile",
+            description="Endpoint to get the profile of the student hall associated with the hall admin.")
+async def get_associated_student_hall_profile(
+    db: Session = Depends(get_session),
+    hall_admin: HallAdmin = Depends(get_current_hall_admin)
+):
+    student_hall_profile = HallAdminService.get_hall_profile_of_admin(
+        db,
+        hall_admin.hall_admin_email
+    )
+    return student_hall_profile
+
+@router.post("/create_student",
+            response_model=MessageResponse,
+            status_code=status.HTTP_201_CREATED,
+            summary="Create Student Account",
+            description="Endpoint for hall admin to create a student account.")
+async def create_student_account(
+    student_data: StudentSignUpRequest,
+    db: Session = Depends(get_session),
+    hall_admin: HallAdmin = Depends(get_current_hall_admin)
+):
+    message_response = HallAdminService.create_hall_resident_student_account(
+        db,
+        student_data,
+        hall_admin.hall_admin_email
+    )
+    return message_response
+
+@router.get("/students_in_hall",
+            response_model=list[StudentProfileResponse],
+            status_code=status.HTTP_200_OK,
+            summary="Get All Students in Hall",
+            description="Endpoint to get all students in the hall associated with the hall admin.")
+async def get_all_students_in_hall(
+    db: Session = Depends(get_session),
+    hall_admin: HallAdmin = Depends(get_current_hall_admin)
+):
+    students_profiles = HallAdminService.get_all_students_in_hall(
+        db,
+        hall_admin.hall_admin_email
+    )
+    return students_profiles
+
+@router.get("/total_students",
+            response_model=int,
+            status_code=status.HTTP_200_OK,
+            summary="Get Total Students in Hall",
+            description="Endpoint to get the total number of students in the hall associated with the hall admin")
+async def get_total_students_in_hall(
+    db: Session = Depends(get_session),
+    hall_admin: HallAdmin = Depends(get_current_hall_admin)
+):
+    total_students = HallAdminService.get_total_students_in_hall(
+        db,
+        hall_admin.hall_admin_email
+    )
+    return total_students
