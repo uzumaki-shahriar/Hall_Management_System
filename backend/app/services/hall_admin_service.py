@@ -179,6 +179,14 @@ class HallAdminService:
                 detail="Hall Admin with this ID not found"
             )
          hall_id = hall_admin.asscociated_hall_id
+        #  student_hall = sthall.get_student_hall_by_id(
+        #     db, hall_id
+        #  )
+        #  if not student_hall:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_404_NOT_FOUND,
+        #         detail="Associated Student Hall not found"
+        #     )
          existing_student = scrud.get_student_by_email(
             db, student_data.student_email
          )
@@ -196,6 +204,7 @@ class HallAdminService:
                 student_name=student_data.student_name,
                 student_room_number=student_data.student_room_number,
                 student_batch=student_data.student_batch,
+                student_hall_fee=student_data.hall_fee,
                 student_department=student_data.student_department,
                 student_hashed_password=hashed_password,
                 created_by_hall_admin_id=hall_admin.hall_admin_id,

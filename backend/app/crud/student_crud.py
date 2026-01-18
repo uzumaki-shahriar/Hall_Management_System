@@ -17,3 +17,16 @@ def create_student(db: Session, student: Student) -> Student:
     db.commit()
     db.refresh(student)
     return student
+
+def update_student(db: Session, student: Student) -> Student:
+    db.add(student)
+    db.commit()
+    db.refresh(student)
+    return student
+
+def change_student_password(db: Session, student_email: str, new_hashed_password: str) -> None:
+    student = get_student_by_email(db, student_email)
+    if student:
+        student.student_hashed_password = new_hashed_password
+        db.add(student)
+        db.commit()

@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -8,6 +9,7 @@ class StudentSignUpRequest(BaseModel):
     student_name: str = Field(..., max_length=100)
     student_room_number: int
     student_batch: str = Field(..., max_length=10)
+    hall_fee: float
     student_department: str = Field(..., max_length=50)
 
 class StudentLoginRequest(BaseModel):
@@ -24,8 +26,8 @@ class StudentProfileResponse(BaseModel):
     student_department: str
     student_batch: str
     student_room_number: int
-    student_contact_number: str
-    student_home_address: str
+    student_contact_number: Optional[str]
+    student_home_address: Optional[str]
     student_hall_name: str
 
     class Config:
@@ -36,5 +38,9 @@ class StudentProfileUpdateRequest(BaseModel):
     student_contact_number: str = Field(..., max_length=15)
     student_home_address: str = Field(..., max_length=200)
 
+class StudentPasswordChangeRequest(BaseModel):
 
+    current_password: str = Field(..., min_length=8, max_length=100)
+    new_password: str = Field(..., min_length=8, max_length=100)
+    confirm_new_password: str = Field(..., min_length=8, max_length=100)
 
