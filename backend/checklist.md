@@ -8,6 +8,30 @@
 3. SuperAdminLoginRequest
 4. SuperAdminProfileResponse
 
+<!-- Pending -->
+1. Hall Creation
+2. Hall Admin Creation
+
+# HALL ADMIN
+<!-- HALL ADMIN -->
+
+<!-- COMPLETED -->
+1. Hall Admin Model
+2. HallAdminSignRequest
+3. HallAdminLoginRequest
+4. HallAdminProfileResponse
+
+<!-- PENDING -->
+1. Hall Admin Services
+2. Hall Admin Routes
+
+
+# STUDENT HALL
+<!-- STUDENT HALL -->
+
+<!-- Completed -->
+1. Student Hall Model
+
 # STUDENT
 <!-- STUDENT -->
 

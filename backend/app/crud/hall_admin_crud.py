@@ -2,6 +2,11 @@ from sqlmodel import Session, select
 from typing import Optional
 from ..models.hall_admin_model import HallAdmin
 
+def get_all_hall_admins(db: Session) -> list[HallAdmin]:
+    statement = select(HallAdmin)
+    results = db.exec(statement).all()
+    return results
+
 def get_hall_admin_by_email(db: Session, email: str) -> Optional[HallAdmin]:
     statement = select(HallAdmin).where(HallAdmin.hall_admin_email == email)
     result = db.exec(statement).first()
