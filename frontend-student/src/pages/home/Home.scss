@@ -1,0 +1,55 @@
+@use '../../Vars.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&display=swap');
+
+.home-container {
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), // dark overlay
+        url('../../assets/landing.webp') no-repeat center center; // background image
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+        font-family: var(--logo-font);
+        font-size: clamp(4rem, 10vw, 8rem);
+        color: var(--primary-color);
+        text-align: center;
+        // margin-top: 4rem;
+    }
+
+    .slogan {
+        font-family: "Rubik Marker Hatch", system-ui;
+        font-size: 4rem;
+        font-weight: bold;
+        color: var(--text-color1);
+        text-align: center;
+        margin-top: -3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        // border-right: 0.15em solid var(--primary-color); // blinking cursor
+        animation: blink 0.7s infinite step-end;
+    }
+
+    @keyframes blink {
+
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: var(--primary-color);
+        }
+    }
+
+    .goto-login-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+}
