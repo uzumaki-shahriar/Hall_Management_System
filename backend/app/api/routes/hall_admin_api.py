@@ -64,7 +64,7 @@ async def change_hall_admin_password(
     change_password_data: HallAdminChangePasswordRequest,
     db: Session = Depends(get_session),
     hall_admin: HallAdmin = Depends(get_current_hall_admin)
-):
+)-> MessageResponse:
     message_response = HallAdminService.change_hall_admin_password(
         db,
         hall_admin.hall_admin_email,

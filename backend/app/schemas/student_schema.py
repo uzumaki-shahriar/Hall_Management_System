@@ -6,7 +6,7 @@ class StudentSignUpRequest(BaseModel):
     student_id: str = Field(..., max_length=8)
     student_email: EmailStr
     student_name: str = Field(..., max_length=100)
-    student_room_number: int = Field(..., max_length=10)
+    student_room_number: int
     student_batch: str = Field(..., max_length=10)
     student_department: str = Field(..., max_length=50)
 

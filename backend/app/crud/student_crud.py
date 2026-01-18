@@ -8,7 +8,7 @@ def get_student_by_id(db: Session, student_id: str) -> Optional[Student]:
     return result
 
 def get_student_by_email(db: Session, student_email: str) -> Optional[Student]:
-    statement = select(Student).where(Student.email == student_email)
+    statement = select(Student).where(Student.student_email == student_email)
     result = db.exec(statement).first()
     return result
 

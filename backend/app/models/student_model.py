@@ -21,7 +21,7 @@ class Student(SQLModel, table=True):
     student_contact_number: Optional[str] = Field(default=None, max_length=15, nullable=True)
     student_batch: Optional[str] = Field(default=None, max_length=10, nullable=True)
     student_hall_fee: Optional[Decimal] = Field(default=None, nullable=True)
-    student_room_number: Optional[int] = Field(default=None, max_length=10, nullable=True)
+    student_room_number: Optional[int] = Field(default=0, nullable=True)
     student_hashed_password: str = Field(max_length=255)
     created_by_hall_admin_id: Optional[str] = Field(default=None, foreign_key="hall_admins.hall_admin_id", index=True, max_length=36)
     student_hall_id: Optional[str] = Field(default=None, foreign_key="student_halls.hall_id", index=True, max_length=36)

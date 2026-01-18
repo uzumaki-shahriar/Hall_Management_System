@@ -7,7 +7,7 @@ from ..models.student_model import Student
 from ..schemas.hall_admin_schema import HallAdminLoginRequest, HallAdminProfileResponse, HallAdminChangePasswordRequest
 from ..schemas.student_hall_schema import StudentHallProfileResponse
 from ..schemas.student_schema import StudentSignUpRequest, StudentProfileResponse
-from ..schemas.helper_schema import TokenResponse
+from ..schemas.helper_schema import TokenResponse, MessageResponse
 from ..crud import hall_admin_crud as hadmin
 from ..crud import student_hall_crud as sthall
 from ..crud import student_crud as scrud    
@@ -98,7 +98,7 @@ class HallAdminService:
         db: Session,
         hall_admin_email: str,
         changed_password_data: HallAdminChangePasswordRequest
-    ) -> None:
+    ) -> MessageResponse:
         hall_admin = hadmin.get_hall_admin_by_email(
             db, hall_admin_email
         )
@@ -127,6 +127,11 @@ class HallAdminService:
             db,
             hall_admin_email,
             new_hashed_password
+        )
+        return MessageResponse(
+            response_code=status.HTTP_200_OK,
+            message="Password changed successfully",
+            success=True
         )
 
 
@@ -164,7 +169,7 @@ class HallAdminService:
         db: Session,
         student_data: StudentSignUpRequest,
         hall_admin_email: str
-    )-> Student:
+    )-> MessageResponse:
          hall_admin = hadmin.get_hall_admin_by_email(
             db, hall_admin_email
         )
@@ -175,7 +180,7 @@ class HallAdminService:
             )
          hall_id = hall_admin.asscociated_hall_id
          existing_student = scrud.get_student_by_email(
-            db, student_data.email
+            db, student_data.student_email
          )
          if existing_student:
             raise HTTPException(
@@ -189,7 +194,7 @@ class HallAdminService:
              student_id=student_data.student_id,
              student_email=student_data.student_email,
                 student_name=student_data.student_name,
-                studet_room_number=student_data.student_room_number,
+                student_room_number=student_data.student_room_number,
                 student_batch=student_data.student_batch,
                 student_department=student_data.student_department,
                 student_hashed_password=hashed_password,
@@ -203,7 +208,11 @@ class HallAdminService:
              student_name=student_data.student_name,
              student_password=generated_password
          )
-         return new_student
+         return MessageResponse(
+            response_code=status.HTTP_201_CREATED,
+            message="Student account created successfully and credentials sent via email",
+            success=True
+        )
     
 
     @staticmethod
@@ -275,7 +284,22 @@ class HallAdminService:
         )
         return len(students)
     
-
+    @staticmethod
+    def get_all_student_halls(
+        db: Session
+    )-> List[StudentHallProfileResponse]:
+        student_halls = sthall.get_all_student_halls(db)
+        student_halls_profiles = []
+        for student_hall in student_halls:
+            student_halls_profiles.append(
+                StudentHallProfileResponse(
+                    hall_id=student_hall.hall_id,
+                    hall_name=student_hall.hall_name,
+                    associated_university_name=student_hall.associated_university_name,
+                    total_rooms=student_hall.total_rooms
+                    )
+            )
+        return student_halls_profiles
          
 
          
