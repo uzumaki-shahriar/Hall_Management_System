@@ -1,0 +1,61 @@
+@use '../../Vars.scss' as *;
+
+.dining-form {
+    background: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+
+    h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--third-color);
+        margin-bottom: 16px;
+    }
+
+    .form-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        // background-color: red;
+
+        .item-number {
+            font-weight: 600;
+            width: 80px;
+            text-align: right;
+            font-size: 1.2rem;
+            color: var(--third-color);
+        }
+
+        input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            //   border: 1px solid #ccc;
+            border: none;
+            outline: none;
+            font-size: 1.2rem;
+            background-color: var(--background-color);
+
+            &:focus {
+                outline: none;
+                border: 1px solid var(--primary-color);
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+
+
+        .dining-form-btn {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+}

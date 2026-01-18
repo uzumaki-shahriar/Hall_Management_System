@@ -1,0 +1,59 @@
+@use '../../Vars.scss' as *;
+
+
+.dining-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .dining-table {
+        background: var(--secondary-color);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+
+        .date-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--third-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            thead {
+                background: var(--primary-color);
+                color: var(--background-color);
+
+                th {
+                    font-weight: 600;
+                }
+            }
+
+            th,
+            td {
+                padding: 12px 14px;
+                text-align: left;
+                font-size: 1.2rem;
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid var(--third-color);
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+
+                .total-row {
+                    background: var(--primary-color);
+                    color: var(--background-color);
+                }
+            }
+        }
+    }
+
+}
