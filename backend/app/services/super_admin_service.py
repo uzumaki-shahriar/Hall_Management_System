@@ -1,11 +1,16 @@
 from sqlmodel import Session
 from fastapi import Depends, HTTPException, status
 from ..models.super_admin_model import SuperAdmin
+from ..models.student_hall_model import StudentHall
+from ..models.hall_admin_model import HallAdmin
 from ..schemas.super_admin_schema import SuperAdminLoginRequest, SuperAdminProfileResponse, SuperAdminSignUpRequest
 from ..schemas.helper_schema import TokenResponse, MessageResponse
-from ..crud import super_admin_crud as spdmin
+from ..schemas.student_hall_schema import StudentHallCreationRequest
+from ..schemas.hall_admin_schema import HallAdminSignUpRequest
+from ..crud import super_admin_crud as spdmin, hall_admin_crud as hadmin, student_hall_crud as sthall
 from ..utils.security import hash_password, verify_password,create_access_token, get_token_expiration_seconds
-
+from ..utils.passwordGenerator import generate_hall_admin_password
+from ..utils.emailsender import send_hall_admin_credentials
 
 class SuperAdminService:
 
@@ -87,5 +92,50 @@ class SuperAdminService:
             super_admin_name=super_admin.super_admin_name
         )
     
-    
+    @staticmethod
+    def create_student_hall(
+        db: Session,
+        student_hall_data: StudentHallCreationRequest,
+        hall_admin_data: HallAdminSignUpRequest,
+        creator_super_admin_id: str
+    ):
+        new_student_hall = sthall.create_student_hall(
+            db,
+            StudentHall(
+                hall_name=student_hall_data.hall_name,
+                asscociated_university_name=student_hall_data.associated_university_name,
+                hall_dinning_fee=student_hall_data.hall_dinning_fee,
+                total_rooms=student_hall_data.total_rooms,
+                created_by_super_admin_id=creator_super_admin_id
+            )
+        )
+        existing_admin = hadmin.get_hall_admin_by_email(
+            db, hall_admin_data.hall_admin_email
+        )        
+        if existing_admin:
+            raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Hall Admin with this email already exists"
+            )
+        generated_password = generate_hall_admin_password()
+        hashed_password = hash_password(generated_password)
+        new_hall_admin = hadmin.create_hall_admin(
+            db,
+            HallAdmin(
+                hall_admin_email=hall_admin_data.hall_admin_email,
+                hall_admin_contact_number=hall_admin_data.hall_admin_contact_number,
+                hall_admin_hashed_password=hashed_password,
+                asscociated_hall_id=new_student_hall.hall_id
+            )
+        )
+        send_hall_admin_credentials(
+            hall_admin_email=hall_admin_data.hall_admin_email,
+            hall_name=new_student_hall.hall_name,
+            hall_admin_password=generated_password
+        )
+        
+        return {
+            "student_hall": new_student_hall,
+            "hall_admin": new_hall_admin
+        }
 

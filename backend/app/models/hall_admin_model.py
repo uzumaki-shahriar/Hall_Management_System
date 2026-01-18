@@ -1,7 +1,9 @@
 from sqlmodel import Field, SQLModel, Relationship
-from typing import Optional, List
-from ..models.student_hall_model import StudentHall
+from typing import Optional, List, TYPE_CHECKING
 import uuid
+
+if TYPE_CHECKING:
+    from ..models.student_hall_model import StudentHall
 
 class HallAdmin(SQLModel, table=True):
 
@@ -14,4 +16,4 @@ class HallAdmin(SQLModel, table=True):
     
 
     # Relationships
-    asscociated_hall: Optional[StudentHall] = Relationship(back_populates="hall_admins")
+    asscociated_hall: Optional["StudentHall"] = Relationship(back_populates="hall_admins")

@@ -3,6 +3,8 @@ from sqlmodel import Session
 from ...db.session import get_session
 from ...schemas.super_admin_schema import SuperAdminSignUpRequest, SuperAdminLoginRequest, SuperAdminProfileResponse
 from ...schemas.helper_schema import TokenResponse, MessageResponse
+from ...schemas.student_hall_schema import StudentHallCreationRequest
+from ...schemas.hall_admin_schema import HallAdminSignUpRequest
 from ...services.super_admin_service import SuperAdminService
 from ...utils.dependencies import get_current_super_admin
 from ...models.super_admin_model import SuperAdmin
@@ -59,4 +61,26 @@ async def get_super_admin_profile(
     return SuperAdminService.get_super_admin_profile(db, super_admin)
 
 
+@router.post("/create_student_hall",
+             response_model=MessageResponse,
+             status_code=status.HTTP_201_CREATED,
+             summary="Create Student Hall with Hall Admin",
+             description="Endpoint for super admin to create a student hall along with registering a hall admin.")
+async def create_student_hall_with_hall_admin(
+    student_hall_data: StudentHallCreationRequest,
+    hall_admin_data: HallAdminSignUpRequest,
+    db: Session = Depends(get_session),
+    super_admin: SuperAdmin = Depends(get_current_super_admin)
+):
+    result = SuperAdminService.create_student_hall(
+        db,
+        student_hall_data,
+        hall_admin_data,
+        super_admin.super_admin_id
+    )
+    return MessageResponse(
+        response_code=status.HTTP_201_CREATED,
+        message=f"Student Hall {result.student_hall.hall_name} created successfully with Hall Admin {result.hall_admin.hall_admin_name}",
+        success=True
+    )
 

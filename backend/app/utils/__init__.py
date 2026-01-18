@@ -1,6 +1,8 @@
-from ..utils import security, dependencies
+from ..utils import security, dependencies, passwordGenerator, emailsender
 
 __all__ = [
     "security",
-    "dependencies"
+    "dependencies",
+    "passwordGenerator",
+    "emailsender"
 ]

@@ -22,3 +22,8 @@ def get_student_halls_by_university(db: Session, university_name: str) -> list[S
     statement = select(StudentHall).where(StudentHall.associated_university_name == university_name)
     results = db.exec(statement).all()
     return results
+
+def get_student_hall_name_by_hall_id(db: Session, hall_id: int) -> Optional[str]:
+    statement = select(StudentHall.hall_name).where(StudentHall.hall_id == hall_id)
+    result = db.exec(statement).first()
+    return result
