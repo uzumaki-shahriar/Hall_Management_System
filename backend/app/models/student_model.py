@@ -7,6 +7,7 @@ if TYPE_CHECKING:
     from ..models.hall_admin_model import HallAdmin
     from ..models.student_hall_model import StudentHall
     from ..models.feedback_model import Feedback
+    from ..models.dinning_data_model import DinningData
 
 
 class Student(SQLModel, table=True):
@@ -31,3 +32,4 @@ class Student(SQLModel, table=True):
     created_by_hall_admin: Optional["HallAdmin"] = Relationship(back_populates="student_accounts_created")
     student_hall: Optional["StudentHall"] = Relationship(back_populates="hall_resident_students")
     student_feedbacks: List["Feedback"] = Relationship(back_populates="student")
+    student_dinning_data: List["DinningData"] = Relationship(back_populates="student")
